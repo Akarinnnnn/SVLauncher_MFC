@@ -11,7 +11,6 @@
 #define new DEBUG_NEW
 #endif
 
-
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
@@ -99,7 +98,7 @@ BOOL CSVLauncherMFCDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
-	ShowWindow(SW_MAXIMIZE);
+	ShowWindow(SW_NORMAL);
 
 	ShowWindow(SW_MINIMIZE);
 
