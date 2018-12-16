@@ -84,12 +84,12 @@ BOOL CSVLauncherMFCDlg::OnInitDialog()
 	{
 		BOOL bNameValid;
 		CString strAboutMenu;
-		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
+		bNameValid = strAboutMenu.LoadStringW(IDS_ABOUTBOX);
 		ASSERT(bNameValid);
 		if (!strAboutMenu.IsEmpty())
 		{
-			pSysMenu->AppendMenu(MF_SEPARATOR);
-			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+			pSysMenu->AppendMenuW(MF_SEPARATOR);
+			pSysMenu->AppendMenuW(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
 		}
 	}
 
@@ -100,7 +100,7 @@ BOOL CSVLauncherMFCDlg::OnInitDialog()
 
 	ShowWindow(SW_NORMAL);
 
-	ShowWindow(SW_MINIMIZE);
+	//ShowWindow(SW_MINIMIZE);
 
 	// TODO: 在此添加额外的初始化代码
 
@@ -159,5 +159,5 @@ HCURSOR CSVLauncherMFCDlg::OnQueryDragIcon()
 void CSVLauncherMFCDlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	CDialogEx::OnOK();
+	
 }
