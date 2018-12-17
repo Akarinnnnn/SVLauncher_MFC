@@ -4,7 +4,7 @@
 #else
 #defineSVLAUNCHERDLL_API extern "C" __declspec(dllimport)
 #endif
-
+//c++ 11 std¾¯¸æ
 namespace SVLauncherDLL
 {
 	SVLAUNCHERDLL_API bool CallSV(wchar_t* arg);
@@ -27,4 +27,5 @@ namespace SVLauncherDLL
 		bool offline;
 		bool fo;
 	};
+	auto mapsvarg = 
 }

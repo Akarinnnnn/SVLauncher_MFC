@@ -7,6 +7,8 @@
 #include <sstream>
 #include <iostream>
 #include "winnt.h"
+using std::wstring;
+using std::wistringstream;
 
 wchar_t* operator+= (wchar_t* _Left, wstring _Right)
 {
@@ -15,7 +17,7 @@ wchar_t* operator+= (wchar_t* _Left, wstring _Right)
 	stream >> _Left;
 }
 
-using namespace std;
+
 using namespace SVLauncherDLL;
 wchar_t* BuildArg(svarg a)
 {
