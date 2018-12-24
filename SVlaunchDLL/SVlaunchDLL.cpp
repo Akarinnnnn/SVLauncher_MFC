@@ -24,11 +24,11 @@ using std::vector;
 //	return buffier;
 //}
 
-wchar_t* SVLaunchDLL::BuildArg(SVLaunchDLL::SVPARAM a)
+int SVLaunchDLL::BuildArg(SVLaunchDLL::SVPARAM a,wchar_t target[])
 {
 	
-	const unsigned short paramlen = 500;
-	static wchar_t Arg[paramlen];
+	
+	
 	std::wstring buffier;
 	
 	wstring* p_arg = &(a.cluster);
@@ -57,14 +57,10 @@ wchar_t* SVLaunchDLL::BuildArg(SVLaunchDLL::SVPARAM a)
 	}
 	if (a.offline)
 		buffier += paramitters[9];
-	std::wistringstream sbuff(buffier);
-	if (buffier.size() < paramlen)
-	{
-		buffier.copy(Arg, buffier.size());
-		return Arg;
-	}
-	else	
-		throw std::out_of_range("[SVLaunchDLL.cpp] Arg(wchar_t) out of range");
+	buffier.copy(target, buffier.size());
+	return buffier.size();
+	//else	
+		//throw std::out_of_range("[SVLaunchDLL.cpp] Arg(wchar_t) out of range");
 
 }
 
@@ -132,6 +128,7 @@ BOOL SVLaunchDLL::SVManage::CallSv(wchar_t * SvDir)
 	const DWORD SVCreationFlags = CREATE_NEW_CONSOLE | CREATE_UNICODE_ENVIRONMENT;
 	wchar_t CmdLine[500];
 
+
 	return CreateProcessW(nullptr, CmdLine, nullptr, nullptr, false,
 		SVCreationFlags, NULL, SvDir, &def_siSv, &def_piSv);
 }
@@ -143,5 +140,5 @@ SVLaunchDLL::SVManage::SVManage()
 
 SVLaunchDLL::SVManage::~SVManage()
 {
-	delete &defsvparam;
+	
 }

@@ -40,20 +40,19 @@ namespace SVLaunchDLL
 		BOOL CallSv(wchar_t* SvDir);
 		BOOL CallSv(SVPARAM param);
 		BOOL CallSv();
-		PROCESS_INFORMATION def_piSv;
-		STARTUPINFOW def_siSv;
-		SVPARAM defsvparam;
 		SVManage();
 		~SVManage();
 	private:
-		friend wchar_t* BuildArg(SVPARAM a);
+		PROCESS_INFORMATION def_piSv;
+		STARTUPINFOW def_siSv;
+		SVPARAM defsvparam;
 
 	};
 
-	//变量
+	//数据
 	//SVManage defsvman;
 
 	//函数
-	wchar_t* BuildArg(SVPARAM a);
+	int BuildArg(SVLaunchDLL::SVPARAM a, wchar_t target[]);
 
 };
