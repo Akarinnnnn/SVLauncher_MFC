@@ -1,0 +1,4 @@
+LIBRARY SVLaunchDll
+EXPORTS
+;defsvman
+BuildArg @ 1

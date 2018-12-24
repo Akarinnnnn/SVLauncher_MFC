@@ -1,31 +1,59 @@
 #pragma once
 #ifdef SVLAUNCHDLL_EXPORTS
-#define SVLAUNCHERDLL_API extern "C" __declspec(dllexport)
+#define SVLAUNCHERDLL_API __declspec(dllexport)
 #else
-#defineSVLAUNCHERDLL_API extern "C" __declspec(dllimport)
+#define SVLAUNCHERDLL_API __declspec(dllimport)
 #endif
-//c++ 11 std警告
-namespace SVLauncherDLL
+
+#include <vector>
+#include <iostream>
+#include <memory>
+
+
+
+namespace SVLaunchDLL 
 {
-	SVLAUNCHERDLL_API bool CallSV(wchar_t* arg);
-	SVLAUNCHERDLL_API STARTUPINFOW siSv = {
-		sizeof(siSv),NULL,NULL
-	};
-	SVLAUNCHERDLL_API PROCESS_INFORMATION piSv;
-	using std::wstring;
-	SVLAUNCHERDLL_API struct svarg
+
+	//类型
+	struct SVPARAM
 	{
-		wstring cluster = L"Cluster_1";
-		wstring shard = L"Master";
-		wstring logbackup;
-		wstring storage_root;
-		wstring confdir;
-		wstring tickrate;
-		wstring maxplayers;
-		wstring SteamID3;
-		wstring SteamID64;
+		std::wstring cluster = L"Cluster_1";
+		std::wstring shard = L"Master";
+		std::wstring logbackup;
+		std::wstring storage_root;
+		std::wstring confdir;
+		std::wstring tickrate;
+		std::wstring maxplayers;
+		std::wstring SteamID3;
+		std::wstring SteamID64;
 		bool offline;
 		bool fo;
 	};
-	auto mapsvarg = 
-}
+
+	class SVManage
+	{
+	public:
+		BOOL CallSv(SVPARAM param, wchar_t* SvDir, STARTUPINFOW* p_siSv, PROCESS_INFORMATION* p_piSv);
+		BOOL CallSv(SVPARAM param, wchar_t* SvDir,  PROCESS_INFORMATION* p_piSv);
+		BOOL CallSv(SVPARAM param, wchar_t* SvDir);
+		BOOL CallSv(SVPARAM param, STARTUPINFOW* p_siSv, PROCESS_INFORMATION* p_piSv);
+		BOOL CallSv(wchar_t* SvDir);
+		BOOL CallSv(SVPARAM param);
+		BOOL CallSv();
+		PROCESS_INFORMATION def_piSv;
+		STARTUPINFOW def_siSv;
+		SVPARAM defsvparam;
+		SVManage();
+		~SVManage();
+	private:
+		friend wchar_t* BuildArg(SVPARAM a);
+
+	};
+
+	//变量
+	//SVManage defsvman;
+
+	//函数
+	wchar_t* BuildArg(SVPARAM a);
+
+};
