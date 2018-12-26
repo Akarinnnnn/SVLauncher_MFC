@@ -33,4 +33,16 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedOk();
+private:
+	CString cstrRootStorage;
+	CString cstrConfDir;
+	CString cstrCluster;
+	CString cstrSteamID64;
+	CString cstrSteamID3;
+	CString cstrLogBackup;
+	CString cstrMaxPlayers;
+	CString cstrTR;
+	CString cstrShard;
+	BOOL bFO;
+	BOOL bLocal;
 };

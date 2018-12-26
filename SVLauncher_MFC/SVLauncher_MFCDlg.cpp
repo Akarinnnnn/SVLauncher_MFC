@@ -6,6 +6,9 @@
 #include "SVLauncher_MFC.h"
 #include "SVLauncher_MFCDlg.h"
 #include "afxdialogex.h"
+#include "..\SVlaunchDLL\SVlaunchDLL.hpp"
+#include <iostream>
+#include <string>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -50,6 +53,16 @@ END_MESSAGE_MAP()
 
 CSVLauncherMFCDlg::CSVLauncherMFCDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_SVLAUNCHER_MFC_DIALOG, pParent)
+	, cstrRootStorage(_T(""))
+	, cstrConfDir(_T(""))
+	, cstrSteamID64(_T(""))
+	, cstrSteamID3(_T(""))
+	, cstrLogBackup(_T(""))
+	, cstrMaxPlayers(_T(""))
+	, cstrTR(_T(""))
+	, bFO(FALSE)
+	, bLocal(TRUE)
+	, cstrShard(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -57,6 +70,18 @@ CSVLauncherMFCDlg::CSVLauncherMFCDlg(CWnd* pParent /*=nullptr*/)
 void CSVLauncherMFCDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+
+	DDX_Text(pDX, IDC_RS, cstrRootStorage);
+	DDX_Text(pDX, IDC_CONFDIR, cstrConfDir);
+	DDX_Text(pDX, IDC_CLUSTER, cstrCluster);
+	DDX_Text(pDX, IDC_S_ID64, cstrSteamID64);
+	DDX_Text(pDX, IDC_S_ID3, cstrSteamID3);
+	DDX_Text(pDX, IDC_LOG, cstrLogBackup);
+	DDX_Text(pDX, IDC_MAXPLYR, cstrMaxPlayers);
+	DDX_Text(pDX, IDC_TR, cstrTR);
+	DDX_Check(pDX, IDC_FO, bFO);
+	DDX_Check(pDX, IDC_LOCALSV, bLocal);
+	DDX_Text(pDX, IDC_SHARD, cstrShard);
 }
 
 BEGIN_MESSAGE_MAP(CSVLauncherMFCDlg, CDialogEx)
@@ -158,6 +183,25 @@ HCURSOR CSVLauncherMFCDlg::OnQueryDragIcon()
 
 void CSVLauncherMFCDlg::OnBnClickedOk()
 {
+	using namespace SVLaunchDLL;
+	using std::wcout;
+	using std::endl;//控制台输出
+	using std::wstring;
 	// TODO: 在此添加控件通知处理程序代码
+	SVPARAM* p_param = new SVPARAM;
+
+	p_param->cluster = cstrCluster.GetBuffer();
+	p_param->confdir = cstrConfDir.GetBuffer();
+	p_param->fo = bFO;
+	p_param->logbackup = cstrLogBackup.GetBuffer();
+	p_param->maxplayers = cstrMaxPlayers.GetBuffer();
+	p_param->offline = bLocal;
+	p_param->shard = cstrShard.GetBuffer();
+	p_param->SteamID3 = cstrSteamID3.GetBuffer();
+	p_param->SteamID64 = cstrSteamID64.GetBuffer();
+	p_param->storage_root = cstrRootStorage.GetBuffer();
+	p_param->tickrate = cstrTR.GetBuffer();
 	
+	SVManage* p_svman1 = new SVManage;
+	BOOL ret = p_svman1->CallSv(*p_param,L"K:\\SteamLibrary\\steamapps\\common\\Don't Starve Together\\bin\\");
 }

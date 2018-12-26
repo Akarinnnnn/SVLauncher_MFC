@@ -170,6 +170,11 @@
   <ItemGroup>
     <Image Include="res\SVLauncher_MFC.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SVlaunchDLL\SVlaunchDLL.vcxproj">
+      <Project>{9eec6438-c151-4a30-b93b-0ae3f3e25b96}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
